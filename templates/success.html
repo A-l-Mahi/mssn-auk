@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSSN | SUCCESS</title>
+</head>
+<body>
+    <h1>SUCCESS!!!! </h1>
+    <div>
+        {% for obj in data%}
+        <li>Name: {{ obj.other}} {{obj.surname}}</li>
+        <li>REG NO: {{obj.regno}}</li>
+        <li>Email: {{obj.email}}</li>
+        <li>Department: {{obj.department}}</li>
+        <li>Phone No: {{obj.phone}}</li>
+        <img src="{{obj.qr_code.url}}" alt="">
+        {% endfor %}
+    </div>
+    <input type=button onclick="window.print()" value='Print this page'>
+</body>
+</html>
