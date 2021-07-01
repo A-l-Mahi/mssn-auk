@@ -31,9 +31,9 @@ def index(request):
         qr.add_data(f"Name: {other} {surname}\nReg No: {regno}\nEmail Address: {email}\nDepartment: {department} \nPhone No: {phone}")
         qr.make(fit = True)
         img = qr.make_image(fill_color = "black", black_color = "white")
-        img.save(f"{BASE_DIR}/media/{surname}.png")        
+        img.save(f"{MEDIA_ROOT}/{surname}.png")        
 
-        with open(f"{BASE_DIR}/media/{surname}.png", "rb") as f:
+        with open(f"{MEDIA_ROOT}/{surname}.png", "rb") as f:
             data = f.read()
 
         if not info.objects.filter(email = email):
