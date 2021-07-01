@@ -2,7 +2,7 @@
 from django.db import models
 
 
-class info_db(models.Model):
+class info(models.Model):
     email = models.EmailField(max_length = 254)
     qr_code = models.ImageField(upload_to = 'media', null = True, blank = True)
     surname = models.CharField(max_length = 100)

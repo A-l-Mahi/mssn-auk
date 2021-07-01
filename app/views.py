@@ -3,7 +3,7 @@ import random
 import string
 from qrcode import *
 from MSSN.settings import *
-from .models import info_db 
+from .models import info
 from django.http import HttpResponse
 from paystackapi.paystack import Paystack
 from django.shortcuts import render, redirect
@@ -20,7 +20,7 @@ def index(request):
         department = request.POST['department']
         phone = request.POST['phone']
         
-        #genrate QR
+        #generate QR
         qr = QRCode(
         version = 1,
         error_correction = constants.ERROR_CORRECT_L,
@@ -36,8 +36,8 @@ def index(request):
         with open(f"{BASE_DIR}/media/{surname}.png", "rb") as f:
             data = f.read()
 
-        if not info_db.objects.filter(email = email):
-            obj = info_db()
+        if not info.objects.filter(email = email):
+            obj = info()
             obj.email = email
             obj.surname = surname
             obj.phone = phone
@@ -66,6 +66,6 @@ def payment(request):
         
 def success(request):
     
-    obj = info_db.objects.filter(email = email)
+    obj = info.objects.filter(email = email)
 
     return render(request, "success.html", {'data':obj})
