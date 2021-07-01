@@ -37,9 +37,7 @@ def index(request):
         with open(f"{MEDIA_ROOT}/{surname}.png", "rb") as f:
             data = f.read()
 
-        if info.objects.filter(email = email):
-            return redirect("/")
-        else:
+        if not info.objects.filter(email = email):
             obj = info()
             obj.email = email
             obj.surname = surname
@@ -50,6 +48,7 @@ def index(request):
             obj.qr_code.save(f'{surname}.png', ContentFile(data))
             obj.save()
             return redirect('payment')
+        return redirect('/')
     return render(request, 'index.html')
 
 def payment(request):
@@ -67,7 +66,7 @@ def payment(request):
         return redirect('/')
         
 def success(request):
-
+    
     obj = info.objects.filter(email = email)
 
     return render(request, "success.html", {'data':obj})
